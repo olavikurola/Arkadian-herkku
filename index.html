@@ -51,15 +51,15 @@
 
         .header-accent { width: 60px; height: 6px; background: var(--op); margin: 0 auto 20px; border-radius: 10px; }
         h1 { color: var(--op); margin: 0; font-size: 2.2rem; letter-spacing: -1px; }
-        .subtitle { color: #b2bec3; margin-bottom: 25px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; }
+        .subtitle { color: #b2bec3; margin-bottom: 30px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; }
 
         .product-list { margin-bottom: 30px; }
         
         .product { 
             display: flex; justify-content: space-between; align-items: center; 
-            padding: 18px 15px; border-bottom: 1px solid #f1f1f1; 
+            padding: 20px 15px; border-bottom: 1px solid #f1f1f1; 
             transition: all 0.3s ease; border-radius: 15px;
-            position: relative; margin-bottom: 5px;
+            position: relative; margin-bottom: 8px;
         }
 
         /* Aktiivisen tärpin tyyli */
@@ -79,12 +79,6 @@
 
         .product-name { font-weight: 600; font-size: 1.1rem; }
         .price { font-weight: 800; color: var(--op); font-size: 1.1rem; }
-
-        .joke-card {
-            background: #f9f9f9; padding: 15px; border-radius: 15px;
-            margin-bottom: 25px; font-style: italic; font-size: 0.9rem;
-            color: #555; border-left: 4px solid var(--op);
-        }
 
         .payment-section {
             background: linear-gradient(145deg, #ffffff, #fff5f0);
@@ -120,8 +114,6 @@
         <h1>Arkadian Herkku</h1>
         <p class="subtitle">Official Snack Station</p>
 
-        <div id="joke-box" class="joke-card">💡 Ladataan päivän vitsiä...</div>
-
         <div class="product-list" id="main-list">
             <div class="product">
                 <span class="product-name">🥤 Sanpellegrino Rosso</span> 
@@ -155,18 +147,6 @@
     </div>
 
     <script>
-        // VITSI-LOGIIKKA
-        const vitsit = [
-            "Miksi koodari ei päässyt rannalle? Koska hänellä oli liikaa ikkunoita auki.",
-            "Mitä tekee koodari, jos haluaa ruskettua? Lisää kirkkautta näytöstä.",
-            "Miksi tomaatti punastui? Koska se näki salaattikastikkeen alasti.",
-            "Mitä saadaan, kun risteytetään norsu ja koodari? Valtava muisti, mutta huono käyttöliittymä.",
-            "Miksi koodari käyttää laseja? Koska hän ei näe C#:lla.",
-            "Mitä hylje sanoi kahvilassa? 'Saisinko yhden jäätelön ja kolme koodia.'",
-            "Miksi sanottiin koodaria, joka ei osannut uida? Pintaliitäjäksi."
-        ];
-
-        // TÄRPPI-LOGIIKKA
         const tuoteData = [
             { hinta: 2.50 },
             { hinta: 2.50 },
@@ -174,10 +154,6 @@
         ];
 
         function alustaSivu() {
-            // Arvo vitsi
-            const vitsiIndex = Math.floor(Math.random() * vitsit.length);
-            document.getElementById('joke-box').innerText = "💡 " + vitsit[vitsiIndex];
-
             // Aseta tunnin tärppi
             const tunti = new Date().getHours();
             const tarppiIndex = tunti % tuoteData.length;
