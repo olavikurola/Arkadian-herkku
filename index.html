@@ -6,27 +6,26 @@
     <title>Arkadian Herkku - Hinnasto</title>
     <style>
         :root { 
-            --op: #FF6600; /* OP:n oranssi */
+            --op: #FF6600; 
             --dark: #222; 
             --bg: #f8f8f8;
+            --wa-green: #25D366;
         }
 
         body { 
-            font-family: sans-serif; 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
             background: var(--bg); 
             color: var(--dark); 
             margin: 0; 
-            padding: 30px; 
+            padding: 20px; 
             display: flex;
             justify-content: center;
-            align-items: center;
-            min-height: 90vh;
         }
 
         .container { 
             background: white; 
-            padding: 40px; 
-            border-radius: 20px; 
+            padding: 30px; 
+            border-radius: 25px; 
             border-top: 12px solid var(--op); 
             box-shadow: 0 10px 30px rgba(0,0,0,0.1); 
             text-align: center;
@@ -36,58 +35,95 @@
 
         h1 { 
             color: var(--op); 
-            margin: 0; 
+            margin: 10px 0 5px 0; 
             text-transform: uppercase;
-            letter-spacing: 1px;
+            font-size: 2rem;
         }
 
         .subtitle { 
-            font-style: italic; color: #666; margin-bottom: 30px; margin-top: 10px;
+            font-style: italic; color: #666; margin-bottom: 30px; font-size: 1rem;
+        }
+
+        .product-list {
+            margin-bottom: 30px;
         }
 
         .product { 
             display: flex; justify-content: space-between; align-items: center; 
-            padding: 15px 0; border-bottom: 2px solid #eee; font-size: 1.2rem; font-weight: bold; 
+            padding: 15px 0; border-bottom: 2px solid #eee; font-size: 1.1rem; font-weight: 600; 
         }
 
         .price { 
-            background: var(--op); color: white; padding: 8px 15px; 
-            border-radius: 30px; font-size: 1.1rem; 
+            background: var(--op); color: white; padding: 6px 14px; 
+            border-radius: 50px; font-size: 1rem; 
         }
 
         .payment-section {
-            margin-top: 40px;
-            background: #fff5ee; /* Haalea oranssi tausta */
-            padding: 25px;
-            border-radius: 15px;
-            border: 2px dashed var(--op);
+            background: #fff8f4;
+            padding: 20px;
+            border-radius: 20px;
+            border: 2px solid #ffe8d9;
+            margin-bottom: 20px;
         }
 
-        /* TÄMÄ ON SE TÄRKEÄ KOHTA: KUVAN TYYLI */
-        .qr-image {
+        .qr-placeholder {
             width: 180px;
             height: 180px;
-            /* Tässä määritellään, että kuva haetaan samasta kansiosta */
-            background-image: url('qr-koodi.png');
-            background-size: cover;
-            background-position: center;
-            margin: 20px auto;
+            margin: 15px auto;
+            background-color: white;
             border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             border: 1px solid #ddd;
+            overflow: hidden;
         }
 
-        .pay-info {
-            font-weight: bold; color: var(--op); font-size: 1.2rem; display: block;
+        .qr-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
+
         .phone {
-            font-size: 1.3rem; font-weight: 900; margin-top: 10px; display: block;
+            font-size: 1.4rem; font-weight: 800; color: var(--op); display: block; margin-top: 5px;
         }
 
-        /* Tulostusasetukset (A4 pysty) */
+        /* WhatsApp-osio */
+        .wish-section {
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+
+        .wa-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background-color: var(--wa-green);
+            color: white;
+            text-decoration: none;
+            padding: 15px;
+            border-radius: 15px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: transform 0.2s;
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+        }
+
+        .wa-button:active {
+            transform: scale(0.98);
+        }
+
+        footer {
+            margin-top: 30px; color: #aaa; font-size: 0.8rem; text-transform: uppercase;
+        }
+
         @media print {
-            body { background: white; padding: 0; align-items: flex-start; }
-            .container { box-shadow: none; border: none; max-width: 100%; width: 100%; padding: 20px; }
-            .payment-section { border: 2px solid var(--op); background: white !important; -webkit-print-color-adjust: exact; }
+            body { background: white; padding: 0; }
+            .container { box-shadow: none; border: 2px solid var(--op); width: 100%; max-width: 100%; }
+            .wa-button { border: 1px solid #ccc; color: black; background: white; }
         }
     </style>
 </head>
@@ -95,31 +131,44 @@
 
     <div class="container">
         <h1>Arkadian Herkku</h1>
-        <p class="subtitle">Toimiston oma energiapiste</p>
+        <p class="subtitle">Virallista korttelienergiaa</p>
 
-        <div class="product">
-            <span>🥤 Sanpellegrino Rosso</span> 
-            <span class="price">2,50 €</span>
-        </div>
-        <div class="product">
-            <span>💪 SportLife Protein Bar</span> 
-            <span class="price">2,50 €</span>
-        </div>
-        <div class="product">
-            <span>🍫 Panda POP Lakupala</span> 
-            <span class="price">1,00 €</span>
+        <div class="product-list">
+            <div class="product">
+                <span>🥤 Sanpellegrino Rosso</span> 
+                <span class="price">2,50 €</span>
+            </div>
+            <div class="product">
+                <span>💪 Protein Bar</span> 
+                <span class="price">2,50 €</span>
+            </div>
+            <div class="product">
+                <span>🍫 Panda POP Lakupala</span> 
+                <span class="price">1,00 €</span>
+            </div>
         </div>
 
         <div class="payment-section">
-            <span class="pay-info">MAKSA MOBILEPAYLLA</span>
+            <strong style="color: var(--op);">MAKSA MOBILEPAYLLA</strong>
             
-            <div class="qr-image"></div>
+            <div class="qr-placeholder">
+                <img src="qr-koodi.png" alt="Skannaa QR">
+            </div>
 
-            <span style="font-size: 0.9rem;">Tai syötä numero:</span>
+            <span style="font-size: 0.9rem; color: #666;">Numeroon:</span>
             <span class="phone">040 047 1245</span>
         </div>
 
-        <p style="margin-top: 30px; color: #aaa; font-size: 0.8rem;">Kiitos! Nauti herkusta.</p>
+        <div class="wish-section">
+            <p style="margin-bottom: 15px; font-weight: 600; color: #444;">Puuttuuko suosikkisi? ✨</p>
+            <a href="https://wa.me/358400471245?text=Moikka!%20Toivoisin%20Arkadian%20Herkkuun%20tällaista:" class="wa-button">
+                Toivo herkkua WhatsAppilla
+            </a>
+        </div>
+
+        <footer>
+            Kiitos rehellisyydestäsi!
+        </footer>
     </div>
 
 </body>
