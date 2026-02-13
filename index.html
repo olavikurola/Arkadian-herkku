@@ -13,11 +13,17 @@
             --wa-green: #25D366;
         }
 
+        /* Pehmeä sisääntulo-animaatio */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         body { 
             font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
             background-color: var(--bg);
             background-image: radial-gradient(var(--op) 0.5px, transparent 0.5px);
-            background-size: 20px 20px; /* Hieno pistekuvio taustalla */
+            background-size: 20px 20px;
             color: var(--text); 
             margin: 0; 
             padding: 20px; 
@@ -34,46 +40,28 @@
             max-width: 450px;
             width: 100%;
             border: 1px solid rgba(255,102,0,0.1);
+            animation: fadeInUp 0.6s ease-out;
         }
 
         .header-accent {
-            width: 60px;
-            height: 6px;
-            background: var(--op);
-            margin: 0 auto 20px;
-            border-radius: 10px;
+            width: 60px; height: 6px; background: var(--op);
+            margin: 0 auto 20px; border-radius: 10px;
         }
 
-        h1 { 
-            color: var(--op); 
-            margin: 0; 
-            font-size: 2.2rem;
-            letter-spacing: -1px;
-        }
+        h1 { color: var(--op); margin: 0; font-size: 2.2rem; letter-spacing: -1px; }
+        .subtitle { color: #b2bec3; margin-bottom: 30px; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
 
-        .subtitle { 
-            color: #b2bec3; 
-            margin-bottom: 30px; 
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        /* Tuotelista */
         .product-list { margin-bottom: 30px; }
         .product { 
             display: flex; justify-content: space-between; align-items: center; 
             padding: 18px 10px; border-bottom: 1px solid #f1f1f1; 
-            transition: background 0.2s;
-            border-radius: 12px;
+            transition: background 0.2s; border-radius: 12px;
         }
         .product:hover { background: #fffcf9; }
         .product-name { font-weight: 600; font-size: 1.1rem; }
-        .price { 
-            font-weight: 800; color: var(--op); font-size: 1.1rem;
-        }
+        .price { font-weight: 800; color: var(--op); font-size: 1.1rem; }
 
-        /* Maksuosio */
+        /* Maksuosio linkillä */
         .payment-section {
             background: linear-gradient(145deg, #ffffff, #fff5f0);
             padding: 25px;
@@ -81,50 +69,43 @@
             border: 2px solid var(--op);
             margin-bottom: 25px;
             box-shadow: 0 10px 20px rgba(255, 102, 0, 0.05);
+            transition: transform 0.2s;
         }
+        .payment-section:active { transform: scale(0.98); }
 
+        .qr-link { text-decoration: none; color: inherit; display: block; }
+        
         .qr-frame {
-            width: 200px;
-            height: 200px;
-            margin: 15px auto;
-            background: white;
-            padding: 10px;
-            border-radius: 15px;
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+            width: 200px; height: 200px; margin: 15px auto;
+            background: white; padding: 10px; border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            position: relative;
         }
         .qr-frame img { width: 100%; height: 100%; border-radius: 5px; }
+
+        .tap-hint {
+            display: block; font-size: 0.8rem; color: var(--op);
+            font-weight: bold; margin-bottom: 10px; text-transform: uppercase;
+        }
 
         .phone-label { font-size: 0.8rem; color: #636e72; text-transform: uppercase; }
         .phone { font-size: 1.6rem; font-weight: 900; color: var(--op); display: block; }
 
-        /* Vitsiosio */
         .joke-card {
-            background: #f9f9f9;
-            padding: 15px;
-            border-radius: 15px;
-            margin-bottom: 25px;
-            font-style: italic;
-            font-size: 0.95rem;
-            color: #555;
-            border-left: 4px solid var(--op);
+            background: #f9f9f9; padding: 15px; border-radius: 15px;
+            margin-bottom: 25px; font-style: italic; font-size: 0.95rem;
+            color: #555; border-left: 4px solid var(--op);
         }
 
-        /* Nappi */
         .wa-button {
             display: flex; align-items: center; justify-content: center; gap: 8px;
             background-color: var(--wa-green); color: white; text-decoration: none;
             padding: 16px; border-radius: 18px; font-weight: bold;
-            box-shadow: 0 6px 15px rgba(37, 211, 102, 0.2);
-            transition: all 0.2s;
+            box-shadow: 0 6px 15px rgba(37, 211, 102, 0.2); transition: all 0.2s;
         }
-        .wa-button:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3); }
+        .wa-button:hover { transform: translateY(-2px); }
 
         footer { margin-top: 30px; color: #dfe6e9; font-size: 0.8rem; }
-
-        @media print {
-            body { background: white; padding: 0; }
-            .container { box-shadow: none; border: 2px solid black; }
-        }
     </style>
 </head>
 <body>
@@ -134,9 +115,7 @@
         <h1>Arkadian Herkku</h1>
         <p class="subtitle">Premium Office Snacking</p>
 
-        <div id="joke-box" class="joke-card">
-            Ladataan päivän vitsiä...
-        </div>
+        <div id="joke-box" class="joke-card">💡 Ladataan päivän vitsiä...</div>
 
         <div class="product-list">
             <div class="product">
@@ -154,11 +133,14 @@
         </div>
 
         <div class="payment-section">
-            <span class="phone-label">MobilePay</span>
-            <div class="qr-frame">
-                <img src="qr-koodi.png" alt="QR-koodi">
-            </div>
-            <span class="phone">040 047 1245</span>
+            <a href="https://qr.mobilepay.fi/box/cc3868b7-a54c-4224-9eee-c26062cdb15a/pay-in" class="qr-link">
+                <span class="tap-hint">👇 Napauta tästä ja maksa</span>
+                <div class="qr-frame">
+                    <img src="qr-koodi.png" alt="QR-koodi">
+                </div>
+                <span class="phone-label">Tai käytä numeroa:</span>
+                <span class="phone">040 047 1245</span>
+            </a>
         </div>
 
         <a href="https://wa.me/358400471245?text=Moikka!%20Toivoisin%20Arkadian%20Herkkuun%20tällaista:" class="wa-button">
@@ -175,7 +157,7 @@
             "Mitä hylje sanoi, kun se meni kahvilaan? 'Saisinko yhden jäätelön ja kolme koodia.'",
             "Miksi tomaatti punastui? Koska se näki salaattikastikkeen alasti.",
             "Mitä saadaan, kun risteytetään norsu ja koodari? Valtava muisti, mutta huono käyttöliittymä.",
-            "Työpaikkailmoitus: 'Etsitään koodaria, jolla on sosiaalisia taitoja.' Hakijoita: 0.",
+            "Miksi koodari käyttää laseja? Koska hän ei näe C#:lla.",
             "Miksi sanottiin koodaria, joka ei osannut uida? Pintaliitäjäksi."
         ];
 
@@ -183,8 +165,6 @@
             const index = Math.floor(Math.random() * vitsit.length);
             document.getElementById('joke-box').innerText = "💡 " + vitsit[index];
         }
-
-        // Suoritetaan heti kun sivu latautuu
         arvoVitsi();
     </script>
 
